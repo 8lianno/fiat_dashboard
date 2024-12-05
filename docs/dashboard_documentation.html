@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINEST FIAT Payment Analytics Dashboard Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        .metric-box {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .formula {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #f8f9fa;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FINEST FIAT Payment Analytics Dashboard Documentation</h1>
+    
+    <div class="section">
+        <h2>1. Overview</h2>
+        <p>The FINEST FIAT Payment Analytics Dashboard is a comprehensive tool for analyzing payment provider performance, transaction patterns, and optimization opportunities. This documentation provides detailed information about the dashboard's features, calculations, and underlying logic.</p>
+    </div>
+
+    <div class="section">
+        <h2>2. Data Processing</h2>
+        
+        <h3>2.1 Core Data Handling</h3>
+        <div class="metric-box">
+            <h4>Date Processing</h4>
+            <p>Timestamps are converted to datetime format with error handling:</p>
+            <div class="formula">
+                df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')<br>
+                df['completed_at'] = pd.to_datetime(df['completed_at'], errors='coerce')
+            </div>
+        </div>
+
+        <h3>2.2 Key Metric Calculations</h3>
+        
+        <div class="metric-box">
+            <h4>Processing Time</h4>
+            <p>Calculation: Time difference between completion and creation in minutes</p>
+            <div class="formula">
+                processing_time = max(0, (completed_at - created_at).total_seconds() / 60)
+            </div>
+            <p>Error Handling:</p>
+            <ul>
+                <li>Handles null timestamps</li>
+                <li>Ensures non-negative values</li>
+                <li>Returns NaN for invalid calculations</li>
+            </ul>
+        </div>
+
+        <div class="metric-box">
+            <h4>Fee Percentage</h4>
+            <p>Calculation: Fee amount as a percentage of transaction amount</p>
+            <div class="formula">
+                fee_percentage = clip((fee_amount / amount) * 100, 0, 100)
+            </div>
+            <p>Constraints:</p>
+            <ul>
+                <li>Capped between 0% and 100%</li>
+                <li>Handles zero amount transactions</li>
+                <li>Returns NaN for invalid inputs</li>
+            </ul>
+        </div>
+
+        <div class="metric-box">
+            <h4>Success Rate</h4>
+            <p>Calculation: Volume-weighted success rate</p>
+            <div class="formula">
+                success_rate = (completed_volume / total_volume) * 100
+            </div>
+            <p>Features:</p>
+            <ul>
+                <li>Volume-weighted for more accurate representation</li>
+                <li>Handles empty data sets</li>
+                <li>Returns 0 for invalid calculations</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Provider Performance Analysis</h2>
+        
+        <h3>3.1 Cost Efficiency Score</h3>
+        <div class="metric-box">
+            <p>The cost efficiency score is a composite metric using normalized components:</p>
+            <div class="formula">
+                score = (normalized_fee * 0.4) + (normalized_processing_time * 0.3) + ((1 - normalized_success_rate) * 0.3)
+            </div>
+            <p>Weights:</p>
+            <ul>
+                <li>Fee Percentage: 40%</li>
+                <li>Processing Time: 30%</li>
+                <li>Failure Rate: 30%</li>
+            </ul>
+        </div>
+
+        <h3>3.2 Performance Grading</h3>
+        <table>
+            <tr>
+                <th>Grade</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>Top 20% performers</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>60-80th percentile</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td>40-60th percentile</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td>20-40th percentile</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>Bottom 20% performers</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>4. Transaction Size Analysis</h2>
+        
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Range</th>
+                <th>Analysis Criteria</th>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td>$0 - $1,000</td>
+                <td>Minimum 5 transactions required</td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td>$1,000 - $5,000</td>
+                <td>Minimum 5 transactions required</td>
+            </tr>
+            <tr>
+                <td>Large</td>
+                <td>$5,000+</td>
+                <td>Minimum 5 transactions required</td>
+            </tr>
+        </table>
+
+        <div class="note">
+            <p><strong>Note:</strong> Provider recommendations are only made when there are at least 5 transactions in a category to ensure statistical significance.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Visualization Components</h2>
+        
+        <h3>5.1 Regional Analysis</h3>
+        <ul>
+            <li>Treemap: Hierarchical volume distribution (Region → Country → Channel)</li>
+            <li>Line Charts: Daily volume trends by region</li>
+            <li>Sunburst: Success rates by region and country</li>
+            <li>Box Plots: Processing time distribution by region and method</li>
+        </ul>
+
+        <h3>5.2 Currency Analysis</h3>
+        <ul>
+            <li>Pie Charts: Transaction volume and fee revenue distribution by currency</li>
+            <li>Aggregated metrics: Total volume, transaction count, and fee revenue by currency</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. Data Filtering</h2>
+        
+        <h3>6.1 Available Filters</h3>
+        <ul>
+            <li>Region</li>
+            <li>Country</li>
+            <li>Transaction Type</li>
+            <li>Channel</li>
+            <li>Payment Method</li>
+            <li>Date Range</li>
+        </ul>
+
+        <div class="note">
+            <p><strong>Note:</strong> All filters are applied using AND logic, meaning transactions must match all selected criteria to be included in the analysis.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. Best Practices</h2>
+        
+        <h3>7.1 Recommendations for Analysis</h3>
+        <ul>
+            <li>Use date ranges with sufficient data (at least 30 days recommended)</li>
+            <li>Consider volume-weighted metrics for more accurate insights</li>
+            <li>Pay attention to the transaction count when analyzing provider performance</li>
+            <li>Use multiple metrics rather than relying on a single indicator</li>
+        </ul>
+
+        <h3>7.2 Data Quality Considerations</h3>
+        <ul>
+            <li>Monitor for unusual patterns in processing times</li>
+            <li>Verify fee percentages against expected ranges</li>
+            <li>Check for consistency in success rates across regions</li>
+            <li>Validate currency conversion rates for cross-currency analysis</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Troubleshooting</h2>
+        
+        <h3>8.1 Common Issues</h3>
+        <table>
+            <tr>
+                <th>Issue</th>
+                <th>Possible Cause</th>
+                <th>Solution</th>
+            </tr>
+            <tr>
+                <td>Missing Metrics</td>
+                <td>Insufficient data or filtering too aggressively</td>
+                <td>Broaden date range or relax filters</td>
+            </tr>
+            <tr>
+                <td>Unexpected Scores</td>
+                <td>Outliers in processing time or fees</td>
+                <td>Check for anomalous transactions</td>
+            </tr>
+            <tr>
+                <td>Inconsistent Grades</td>
+                <td>Small sample size</td>
+                <td>Ensure minimum transaction threshold is met</td>
+            </tr>
+        </table>
+    </div>
+
+    <footer style="margin-top: 50px; text-align: center; color: #6c757d; border-top: 1px solid #dee2e6; padding-top: 20px;">
+        <p>FINEST FIAT Payment Analytics Dashboard Documentation</p>
+        <p>Last Updated: 2024</p>
+    </footer>
+</body>
+</html>

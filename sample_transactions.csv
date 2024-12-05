@@ -1,0 +1,41 @@
+Type,Country,Channel,Method,Amount,Cost & %,Net Profit & %,P&L,request_time
+Deposit,USA,Bank Wire,ACH,5000.00,1.5,0.8,40.00,2024-01-01 08:30:00
+Withdrawal,UK,Credit Card,Visa,750.50,2.5,1.2,9.01,2024-01-01 09:15:00
+Deposit,Germany,Bank Wire,SEPA,3500.00,1.2,0.9,31.50,2024-01-01 10:45:00
+Deposit,France,Digital Wallet,PayPal,1200.00,3.5,1.5,18.00,2024-01-01 11:20:00
+Withdrawal,Spain,Bank Wire,SWIFT,2800.00,2.0,1.1,30.80,2024-01-01 12:00:00
+Deposit,Italy,Credit Card,Mastercard,950.75,2.8,1.3,12.36,2024-01-01 13:30:00
+Withdrawal,Canada,Digital Wallet,Apple Pay,1500.00,3.0,1.4,21.00,2024-01-01 14:45:00
+Deposit,Australia,Bank Wire,Local Transfer,4200.00,1.8,1.0,42.00,2024-01-01 15:20:00
+Deposit,Japan,Credit Card,JCB,2100.00,2.2,1.2,25.20,2024-01-01 16:00:00
+Withdrawal,Brazil,Digital Wallet,Google Pay,800.00,3.2,1.3,10.40,2024-01-01 17:15:00
+Deposit,USA,Credit Card,Amex,6500.00,2.9,1.4,91.00,2024-01-02 08:00:00
+Withdrawal,UK,Bank Wire,Faster Payments,1800.00,1.6,0.9,16.20,2024-01-02 09:30:00
+Deposit,Germany,Digital Wallet,PayPal,2900.00,3.4,1.5,43.50,2024-01-02 10:15:00
+Withdrawal,France,Credit Card,Visa,1100.00,2.7,1.2,13.20,2024-01-02 11:45:00
+Deposit,Spain,Bank Wire,SEPA,4800.00,1.3,0.8,38.40,2024-01-02 12:30:00
+Withdrawal,Italy,Digital Wallet,Apple Pay,950.00,3.1,1.4,13.30,2024-01-02 13:15:00
+Deposit,Canada,Credit Card,Mastercard,3300.00,2.6,1.3,42.90,2024-01-02 14:00:00
+Withdrawal,Australia,Bank Wire,SWIFT,2600.00,1.9,1.0,26.00,2024-01-02 15:30:00
+Deposit,Japan,Digital Wallet,Line Pay,1700.00,3.3,1.5,25.50,2024-01-02 16:45:00
+Withdrawal,Brazil,Credit Card,Visa,900.00,2.8,1.2,10.80,2024-01-02 17:20:00
+Deposit,USA,Bank Wire,ACH,7500.00,1.4,0.9,67.50,2024-01-03 08:45:00
+Withdrawal,UK,Digital Wallet,PayPal,2200.00,3.5,1.4,30.80,2024-01-03 09:20:00
+Deposit,Germany,Credit Card,Mastercard,4100.00,2.5,1.2,49.20,2024-01-03 10:00:00
+Withdrawal,France,Bank Wire,SEPA,1600.00,1.7,0.8,12.80,2024-01-03 11:30:00
+Deposit,Spain,Digital Wallet,Google Pay,3800.00,3.2,1.5,57.00,2024-01-03 12:15:00
+Withdrawal,Italy,Credit Card,Visa,1050.00,2.9,1.3,13.65,2024-01-03 13:45:00
+Deposit,Canada,Bank Wire,Local Transfer,5200.00,1.5,0.9,46.80,2024-01-03 14:20:00
+Withdrawal,Australia,Digital Wallet,Apple Pay,1900.00,3.4,1.4,26.60,2024-01-03 15:00:00
+Deposit,Japan,Credit Card,JCB,2800.00,2.3,1.1,30.80,2024-01-03 16:30:00
+Withdrawal,Brazil,Bank Wire,Local Transfer,1300.00,1.8,0.8,10.40,2024-01-03 17:45:00
+Deposit,USA,Digital Wallet,PayPal,8500.00,3.3,1.5,127.50,2024-01-04 08:15:00
+Withdrawal,UK,Credit Card,Mastercard,2400.00,2.7,1.2,28.80,2024-01-04 09:45:00
+Deposit,Germany,Bank Wire,SEPA,4600.00,1.4,0.9,41.40,2024-01-04 10:30:00
+Withdrawal,France,Digital Wallet,Apple Pay,1400.00,3.5,1.4,19.60,2024-01-04 11:15:00
+Deposit,Spain,Credit Card,Visa,4200.00,2.6,1.3,54.60,2024-01-04 12:45:00
+Withdrawal,Italy,Bank Wire,SWIFT,1150.00,1.9,0.8,9.20,2024-01-04 13:20:00
+Deposit,Canada,Digital Wallet,Google Pay,3600.00,3.2,1.5,54.00,2024-01-04 14:50:00
+Withdrawal,Australia,Credit Card,Visa,2000.00,2.8,1.2,24.00,2024-01-04 15:30:00
+Deposit,Japan,Bank Wire,Local Transfer,3100.00,1.6,0.9,27.90,2024-01-04 16:15:00
+Withdrawal,Brazil,Digital Wallet,PayPal,1100.00,3.4,1.3,14.30,2024-01-04 17:40:00
